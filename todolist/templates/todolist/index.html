@@ -1,0 +1,45 @@
+{% load static %}
+<HTML>
+<head>
+<link href="{% static 'todolist/styles.css' %}" rel="stylesheet">
+</head>
+
+<body>
+<div id="wrapper">			
+	<h1>What to do today </h1>										
+	
+	<form action="#" method="POST" role="form">
+	<input type=text" class="input-text" placeholder="Enter todo e.g. Wash my car">						  
+	<button type="submit" id="add-btn">ADD</button>
+	</form>
+
+
+	<button type="button" class="btn btn-warning">DELETE COMPLETED</button>
+	<button type="button" class="btn btn-danger">DELETE ALL</button>
+
+	<ul>
+	{% for todolist in todo_items %}
+		{% if todolist.completed %}
+		<li class="list-group-item todo-completed">{{todolist.text}}</li>
+		{% else %}
+		<a href="#"><li class="list-group-item">{{todolist.text}}</li></a>
+		{% endif %}
+		<!-- TESTINGGGGGGGGGGGGGGGGGGGGGG   
+		<li class="list-group-item">{{todolist.completed}}</li>
+		<li class="list-group-item">{{todolist.id}}</li>
+		<li class="list-group-item">{{todolist}}</li>
+		<li class="list-group-item">{{todolist.xx}}</li>   -->
+		{% endfor %}
+		<!-- DO NOT NEED ANY MORE
+		<li class="list-group-item">Emma</li>
+		<li class="list-group-item todo-completed">Sanna</li>
+		<li class="list-group-item">Marko</li> -->
+	</ul>
+</div>
+
+</body>
+	<footer>
+	Copyright &copy; Bluelime Learning 2018 
+	</footer>
+</HTML>
+

@@ -8,23 +8,26 @@
 <div id="wrapper">			
 	<h1>What to do today </h1>										
 	
-	<form action="#" method="POST" role="form">
-	<input type=text" class="input-text" placeholder="Enter todo e.g. Wash my car">						  
+	<form action ="{% url 'add' %}" method="POST" role="form">
+	{% csrf_token %} 
+	{{form.text}} <!-- when index loaded context sent with form -->
+	<!-- do not need two forms 
+	<input type="text" class="input-text" placeholder="Enter todo e.g. Wash my car"> -->						  
 	<button type="submit" id="add-btn">ADD</button>
 	</form>
 
 
-	<button type="button" class="btn btn-warning">DELETE COMPLETED</button>
-	<button type="button" class="btn btn-danger">DELETE ALL</button>
+	<a href="{% url 'deletecompleted' %}"><button type="button" class="btn btn-warning">DELETE COMPLETED</button></a>
+	<a href="{% url 'deleteall' %}"><button type="button" class="btn btn-danger">DELETE ALL</button></a>
 
 	<ul>
-	{% for todolist in todo_items %}
+	{% for todolist in todo_items %} <!-- when index loaded context sent with todo_items , look VIEWS funcion index()-->
 		{% if todolist.completed %}
 		<li class="list-group-item todo-completed">{{todolist.text}}</li>
 		{% else %}
-		<a href="#"><li class="list-group-item">{{todolist.text}}</li></a>
+		<a href="{% url 'completed' todolist.id %}"><li class="list-group-item">{{todolist.text}}</li></a>
 		{% endif %}
-		<!-- TESTINGGGGGGGGGGGGGGGGGGGGGG   
+	    <!-- TESTINGGGGGGGGGGGGGGGGGGGGGG   
 		<li class="list-group-item">{{todolist.completed}}</li>
 		<li class="list-group-item">{{todolist.id}}</li>
 		<li class="list-group-item">{{todolist}}</li>
